@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: insure-app-container
-        image: shinojc/insureMe
+        image: shinojc/insure-me
         ports:
         - containerPort: 8082
 ---
