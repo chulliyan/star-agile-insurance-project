@@ -1,1 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insure-app-deploy
+  labels:
+    app: insure-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: insure-app
+  template:
+    metadata:
+      labels:
+        app: insure-app
+    spec:
+      containers:
+      - name: insure-app-container
+        image: shinojc/insureMe
+        ports:
+        - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insure-np-service
+  labels:
+    app: insure-app
+spec:
+  selector:
+    app: insure-app
+
+  type: NodePort
+  ports:
+  - nodePort: 31034    
+    port: 8082
+    targetPort: 8082
 
